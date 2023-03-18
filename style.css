@@ -1,0 +1,208 @@
+:root {
+  --color: rgba(13, 110, 139, 0.75);
+  --secondary-color: rgba(229, 148, 0, 0.9);
+  --overlay-color: rgba(24, 39, 51, 0.85);
+  --speed: 0.75s;
+}
+
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 3rem;
+}
+
+#show-case {
+  background: var(--color);
+  color: #fff;
+  height: 100vh;
+  position: relative;
+}
+
+#show-case::before {
+  content: "";
+  background: url("img/showcase.jpg") no-repeat center center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.show-case-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#show-case h1 {
+  font-size: 3rem;
+}
+#show-case p {
+  font-size: 1.2rem;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  background-color: var(--color);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  transition: opacity 1s ease-in;
+  text-decoration: none;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.menu-wrapper .toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+
+.hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  background-color: var(--color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-wrapper .hamburger div {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.menu-wrapper .hamburger > div::before,
+.menu-wrapper .hamburger > div::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+.menu-wrapper .hamburger > div::after {
+  top: 10px;
+}
+
+.menu-wrapper .toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+}
+.menu-wrapper .toggler:checked + .hamburger > div::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+.menu-wrapper .toggler:checked + .hamburger > div::before {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+.menu-wrapper .toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+}
+
+.menu-wrapper .menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-wrapper .menu > div {
+  width: 200vw;
+  height: 200vw;
+  background-color: var(--overlay-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  transform: scale(0);
+}
+
+.menu-wrapper .menu > div > div {
+  max-width: 90vw;
+  text-align: center;
+  max-height: 100vh;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-wrapper .menu > div > div > ul > li {
+  list-style: none;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.menu-wrapper .menu > div > div > ul > li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.menu-wrapper .menu > div > div > ul > li a:hover {
+  color: var(--secondary-color);
+}
+.menu-wrapper .toggler:checked ~ .menu {
+  visibility: visible;
+}
+.menu-wrapper .toggler:checked ~ .menu > div {
+  transform: scale(1);
+  transition-duration: var(--speed);
+}
+.menu-wrapper .toggler:checked ~ .menu > div > div {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  transition-delay: 1s;
+}
